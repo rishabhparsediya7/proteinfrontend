@@ -32,13 +32,11 @@ const SigninForm = () => {
     login();
   };
   const handleSignIn = async () => {
-    console.log("handle signin");
     setLoading(true);
     const getVerifyMail = async () => {
       const response = await axios.post(`${baseUrl}/auth/userExists`, {
         email: email,
       });
-      console.log(response);
       if (response.status == 200 && response.data.exists) {
         localStorage.setItem("email", response.data.email);
         setLoading(false);

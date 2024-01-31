@@ -4,8 +4,6 @@ import SignUpAuth from "./SignUpAuth";
 import { UserContext } from "../../context/UserContext";
 
 const SignUp = () => {
-  const { verified } = useContext(UserContext);
-  console.log("verified: "+verified);
   return (
     <div>
       <Navbar />

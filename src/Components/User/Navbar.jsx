@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import image from "../../assets/main1.jpg";
 import { useSelector } from "react-redux";
+import { selectCartCount } from "../../redux/slice";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const count = useSelector((state) => state.cart.cartList.length);
+  const count = useSelector(selectCartCount);
   const [cartCount, setCartCount] = useState(count);
   const [ismodalOpen, setModalOpen] = useState(false);
   const navigations = [
@@ -17,14 +18,14 @@ const Navbar = () => {
       name: "My Orders",
       href: "/my-order",
     },
-    {
-      name: "Popular",
-      href: "/popular",
-    },
-    {
-      name: "Best Seller",
-      href: "/best-seller",
-    },
+    // {
+    //   name: "Popular",
+    //   href: "/popular",
+    // },
+    // {
+    //   name: "Best Seller",
+    //   href: "/best-seller",
+    // },
     {
       name: "Account",
       href: "/account",
@@ -37,6 +38,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
+    window.location.reload();
   };
   useEffect(() => {
     setCartCount(count);

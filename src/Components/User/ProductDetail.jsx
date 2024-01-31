@@ -4,50 +4,10 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slice";
 import { useNavigate } from "react-router-dom";
+import LocationComponent from "./LocationComponent";
 const ProductDetail = ({ product }) => {
-  const [location, setLocation] = useState({});
-  const [address, setAddres] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const getLocationChange = async (lat, lon) => {
-    console.log("Changing location!");
-    const GEO_BASE_URL = import.meta.env.VITE_GEOCODING_API_URL;
-    const api_key = import.meta.env.VITE_GEOCODING_API_KEY;
-    const lati = location.latitude ? location.latitude : lat;
-    const long = location.longitude ? location.longitude : lon;
-    const api_url = `${GEO_BASE_URL}?q=${lati}%2c+${long}&key=${api_key}`;
-    const response = await axios.get(api_url);
-    if (response.status == 200) {
-      setAddres({
-        city: response.data.results[0].components.city,
-        district: response.data.results[0].components.city_district,
-        state: response.data.results[0].components.state,
-        country: response.data.results[0].components.country,
-        pincode: response.data.results[0].components.postcode,
-        full_address_line: response.data.results[0].formatted,
-      });
-    }
-  };
-
-  useEffect(() => {
-    window.scrollTo(0,0);
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser");
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        getLocationChange(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        setError(`Error getting location: ${error.message}`);
-      }
-    );
-  }, []);
   const handleBuyNow = (product) => {
     dispatch(addToCart(product));
     navigate("/cart");
@@ -90,19 +50,7 @@ const ProductDetail = ({ product }) => {
               Add cart
             </button>
           </div>
-          <div className="flex mb-2 py-4 px-2 justify-between">
-            <div className="flex align-middle my-auto">
-              <p>Delivering to : {address.full_address_line}</p>
-            </div>
-            <div className="flex align-middle">
-              <button
-                onClick={getLocationChange}
-                className="bg-transparent h-8 border-2 py-1 px-2 border-yellow-400 rounded-md"
-              >
-                Change
-              </button>
-            </div>
-          </div>
+          <LocationComponent />
           <div className="flex p-0 w-full justify-between">
             <div className="flex gap-2 w-full">
               {new Array(3).fill("").map((e, index) => (

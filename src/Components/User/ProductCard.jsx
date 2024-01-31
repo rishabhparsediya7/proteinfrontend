@@ -6,19 +6,15 @@ import download__3 from "../../assets/download__3.png";
 import download__4 from "../../assets/download__4.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/slice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CartQuantitytoggle from "./CartQuantitytoggle";
 
 const ProductCard = ({ props }) => {
-  const dispatch = useDispatch();
   const [wished, setWished] = useState(false);
   const handleWishList = () => {
     setWished(!wished);
   };
-  const [cartProducts, setCartProducts] = useState([]);
-  const notify = () => toast.success("Product added to cart!");
-
   const productImages = [
     download__1,
     download__2,
@@ -29,11 +25,7 @@ const ProductCard = ({ props }) => {
     download__3,
     download__4,
   ];
-  const handleProductCart = (props) => {
-    console.log(props);
-    dispatch(addToCart(props));
-    notify();
-  };
+
   return (
     <div className="w-1/2 sm:w-1/3 flex flex-col p-2">
       <ToastContainer
@@ -82,12 +74,7 @@ const ProductCard = ({ props }) => {
         </div>
         <div className="my-auto flex justify-between align-middle">
           <h3 className="my-auto">Rs.{props.price_INR}</h3>
-          <button
-            onClick={() => handleProductCart(props)}
-            className="btn w-16 h-8 border-t-neutral-800 bg-stone-800 text-neutral-100 rounded-md"
-          >
-            <i className="bi bi-plus text-sm font-bold"></i>Add
-          </button>
+          <CartQuantitytoggle props={props} q={0} />
         </div>
       </div>
     </div>

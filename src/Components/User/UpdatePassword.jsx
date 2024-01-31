@@ -16,7 +16,7 @@ const UpdatePassword = () => {
         email: localStorage.getItem("email"),
         password: password,
       });
-      console.log(response);
+      // console.log(response);
       if (response.status == 200) {
         setLoading(false);
         localStorage.setItem("loggedIn", true);
