@@ -4,7 +4,7 @@ import Home from "./Components/User/Home";
 import ProductPage from "./Components/User/ProductPage";
 import SignUp from "./Components/User/SignUp";
 import Cart from "./Components/User/Cart";
-import { UserContext } from "./context/UserContext.js";
+import { FilterContext } from "./context/UserContext.js";
 import { useState } from "react";
 import Signin from "./Components/User/Signin.jsx";
 import UpdatePassword from "./Components/User/UpdatePassword.jsx";
@@ -14,19 +14,12 @@ import Order from "./Components/User/Order.jsx";
 import Account from "./Components/User/Account.jsx";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [verified, setVerified] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
+  const [category, setCategory] = useState("");
+  const [company, setCompany] = useState("");
+  const [price, setPrice] = useState(0);
   return (
-    <UserContext.Provider
-      value={{
-        loggedIn,
-        setLoggedIn,
-        verified,
-        setVerified,
-        accessToken,
-        setAccessToken,
-      }}
+    <FilterContext.Provider
+      value={{ category, setCategory, company, setCompany, price, setPrice }}
     >
       <Router>
         <Routes>
@@ -43,7 +36,7 @@ function App() {
           <Route path="/failed" element={<Cancel />} />
         </Routes>
       </Router>
-    </UserContext.Provider>
+    </FilterContext.Provider>
   );
 }
 

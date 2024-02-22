@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import image from "../../assets/download__1.png";
+import emptyCart from "../../assets/eCart.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CartQuantitytoggle from "./CartQuantitytoggle";
 import LocationComponent from "./LocationComponent";
+import Button from "./Utils/Button";
+import "./cartDetail.css";
 const CartDetails = () => {
   const [ordered_by, setOrdered_by] = useState("");
   const navigate = useNavigate();
@@ -107,10 +110,7 @@ const CartDetails = () => {
           {cartListData.length > 0 && (
             <div className="w-full p-4 flex flex-col gap-2">
               {cartListData.map((e, index) => (
-                <div
-                  key={index}
-                  className="w-full p-2 flex bg-gray-200 rounded-md"
-                >
+                <div key={index} className="w-full p-2 flex bg-icon rounded-md">
                   <div className="h-24 w-28">
                     <img
                       className="h-full w-full rounded-md"
@@ -124,7 +124,7 @@ const CartDetails = () => {
                     <CartQuantitytoggle props={e} q={e.quantity} />
                   </div>
                   <div className="p-2 font-bold italic">
-                    Quantity:{e?.quantity}
+                    Quantity:{e.quantity}
                   </div>
                 </div>
               ))}
@@ -149,18 +149,16 @@ const CartDetails = () => {
                 <LocationComponent />
                 <input
                   type="text"
-                  className="rounded-md border-2 p-2 text-black border-gray-300 focus:border-black mb-2"
+                  className="rounded-md border-[0.025rem] p-2 text-white bg-transparent border-gray-300 mb-2"
                   value={ordered_by}
                   placeholder="Ordered By"
                   onChange={(e) => setOrdered_by(e.target.value)}
                 />
-                <button
+                <Button
                   onClick={() => displayRazorpay()}
                   disabled={localStorage.getItem("access_token") ? false : true}
-                  className="bg-yellow-300 p-2 uppercase font-bold tracking-widest rounded-md"
-                >
-                  Checkout
-                </button>
+                  title={"checkout"}
+                />
               </div>
             </div>
           </div>
@@ -170,11 +168,18 @@ const CartDetails = () => {
         <div>
           <div className="absolute w-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="h-20 w-full rounded-md flex justify-center gap-2 text-center flex-col">
+              <div className="container-animation">
+                <img
+                  className="cartanimation w-40 h-40"
+                  src={emptyCart}
+                  alt=""
+                />
+              </div>
               <h1 className="w-full text-4xl">No products in cart</h1>
               <h1>Get some products for you!</h1>
               <Link
                 to="/"
-                className="btn text-center m-auto align-middle bg-yellow-300 rounded-md p-3 w-fit text-neutral-50 text-lg uppercase tracking-widest"
+                className="btn text-center m-auto align-middle bg-[#1a1a1a] rounded-md p-3 w-fit text-neutral-50 text-lg uppercase tracking-widest"
               >
                 Buy Products
               </Link>

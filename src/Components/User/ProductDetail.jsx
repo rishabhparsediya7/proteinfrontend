@@ -71,7 +71,7 @@ const ProductDetail = ({ product }) => {
           {new Array(5).fill("").map((e, index) => (
             <div
               key={index}
-              className="flex flex-col p-3 shadow-lg rounded-md bg-neutral-50 justify-center align-middle"
+              className="flex flex-col p-3 shadow-lg rounded-md justify-center align-middle"
             >
               <h1 className="text-left text-lg font-bold my-auto">John Doe</h1>
               <p className="text-left my-auto">

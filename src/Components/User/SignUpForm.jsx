@@ -8,8 +8,8 @@ const SignUpForm = ({ handleToggle }) => {
   const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
-    setLoading(true);
     const getVerifyMail = async () => {
+      setLoading(true);
       const response = await axios.post(`${baseUrl}/auth/mail-otp`, {
         email: email,
       });
@@ -20,6 +20,7 @@ const SignUpForm = ({ handleToggle }) => {
         handleToggle();
       }
     };
+    if (!email) return;
     getVerifyMail();
   };
   return (
@@ -35,7 +36,7 @@ const SignUpForm = ({ handleToggle }) => {
       </div>
       <div className="px-4">
         <input
-          className="rounded-md w-full"
+          className="rounded-md w-full bg-transparent text-white"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -44,7 +45,7 @@ const SignUpForm = ({ handleToggle }) => {
       </div>
       <div className="p-4">
         <button
-          className="btn text-xl uppercase font-bold w-full py-2 border-slate-500 bg-yellow-200 rounded-md text-black"
+          className="text-xl uppercase font-bold w-full py-2 rounded-md"
           onClick={handleSignUp}
         >
           {loading ? (

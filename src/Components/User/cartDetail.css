@@ -1,0 +1,18 @@
+.cartanimation {
+  position: absolute;
+  left: 40px;
+  top: -150px;
+  animation: moveRight 10s linear alternate infinite;
+}
+.container-animation {
+  padding: 0px 100px;
+}
+@keyframes moveRight {
+  0% {
+    left: 0;
+    transform: scaleX(1);
+  }
+  100% {
+    left: calc(100% - 200px);
+  }
+}

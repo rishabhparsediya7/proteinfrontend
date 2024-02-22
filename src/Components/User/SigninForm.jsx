@@ -32,8 +32,8 @@ const SigninForm = () => {
     login();
   };
   const handleSignIn = async () => {
-    setLoading(true);
     const getVerifyMail = async () => {
+      setLoading(true);
       const response = await axios.post(`${baseUrl}/auth/userExists`, {
         email: email,
       });
@@ -45,7 +45,7 @@ const SigninForm = () => {
         setError("The email you have entered does not exists! Please signup");
       }
     };
-    getVerifyMail();
+    if (email) getVerifyMail();
   };
   return (
     <div className="flex flex-col">
@@ -61,7 +61,7 @@ const SigninForm = () => {
       <div className="px-4">
         {error && <p>{error}</p>}
         <input
-          className="rounded-md w-full"
+          className="rounded-md w-full bg-transparent focus:outline-none"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -71,7 +71,7 @@ const SigninForm = () => {
       {emailExists && (
         <div className="p-4">
           <input
-            className="rounded-md w-full"
+            className="rounded-md w-full bg-transparent border border-b-2"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -81,7 +81,7 @@ const SigninForm = () => {
       )}
       <div className="px-4">
         <Link
-          className="rounded-md flex justify-end w-full underline text-yellow-600"
+          className="rounded-md flex justify-end w-full underline text-white"
           to="/signup"
         >
           New User ? Sign Up
@@ -89,7 +89,7 @@ const SigninForm = () => {
       </div>
       <div className="p-4">
         <button
-          className="btn text-xl uppercase font-bold w-full py-2 border-slate-500 bg-yellow-200 rounded-md text-black"
+          className="text-xl uppercase font-bold w-full py-2 rounded-md"
           onClick={email && password ? handleAuth : handleSignIn}
         >
           {loading ? (

@@ -1,4 +1,4 @@
-export const categories = {
+const categories = {
   Protein: [
     { name: "Whey Protein", type: "Fast-absorbing", price_INR: 1500 },
     { name: "Casein Protein", type: "Slow-release", price_INR: 2000 },
@@ -103,3 +103,5 @@ export const categories = {
     { name: "Turmeric Curcumin", type: "Anti-Inflammatory", price_INR: 1300 },
   ],
 };
+
+export default categories;

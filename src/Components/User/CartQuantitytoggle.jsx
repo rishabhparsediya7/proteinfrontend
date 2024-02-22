@@ -24,19 +24,16 @@ const CartQuantitytoggle = ({ props, q }) => {
     <div className="button-group flex flex-row border-black">
       <button
         onClick={() => handleQuantityDecrement(props)}
-        className="btn bg-yellow-300 w-6 rounded-l-md"
+        className="w-6 rounded-l-md"
       >
         <i className="bi bi-dash"></i>
       </button>
-      <button
-        id={props._id}
-        className="btn bg-yellow-300 w-8 border-[1px] border-gray-200"
-      >
+      <button id={props._id} className="w-8">
         {quantity}
       </button>
       <button
         onClick={() => handleQuantityIncrement(props)}
-        className="btn bg-yellow-300  w-6 rounded-r-md"
+        className="w-6 rounded-r-md"
       >
         <i className="bi bi-plus"></i>
       </button>

@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "./Utils/Button";
 const LocationComponent = () => {
   const [location, setLocation] = useState({});
-  const [address, setAddres] = useState({});
+  const [landmark, setLandMark] = useState(false);
+  const [street, setStreet] = useState(false);
+  const [landmarkValue, setLandmarkValue] = useState("");
+  const [streetValue, setStreetValue] = useState("");
+  const [address, setAddres] = useState({
+    full_address_line: "",
+  });
 
   const getLocationChange = async (lat, lon) => {
-    console.log("Changing location!");
     const GEO_BASE_URL = import.meta.env.VITE_GEOCODING_API_URL;
     const api_key = import.meta.env.VITE_GEOCODING_API_KEY;
     const lati = location.latitude ? location.latitude : lat;
@@ -44,27 +50,62 @@ const LocationComponent = () => {
     );
   }, []);
   return (
-    <div className="flex flex-col mb-2 py-4 px-2 gap-2 justify-between">
+    <div className="flex flex-col mb-2 py-4 gap-2 justify-between">
       <div className="flex align-middle my-auto">
         <p>
           <strong>Delivering to</strong>
         </p>
       </div>
-      <div>
-        <input
-          type="text"
-          className="rounded-md w-full"
-          onChange={(e) => setAddres(e.target.value)}
-          value={address.full_address_line}
-        />
+      <div className="flex flex-col">
+        <div className="flex-1">
+          <input
+            type="text"
+            className="rounded-md w-full bg-transparent text-white"
+            onChange={(e) => setAddres(e.target.value)}
+            value={address.full_address_line}
+          />
+        </div>
+        <div className="flex gap-2 py-2">
+          {!landmark && (
+            <button
+              onClick={() => setLandMark(true)}
+              className="bg-orange-400 rounded-md p-1 text-[0.70rem]"
+            >
+              Add Landmark
+            </button>
+          )}
+          {!street && (
+            <button
+              onClick={() => setStreet(true)}
+              className="bg-orange-400 rounded-md p-1 text-[0.70rem]"
+            >
+              Add Street
+            </button>
+          )}
+        </div>
+        <div className="flex flex-col gap-y-2">
+          {landmark && (
+            <input
+              type="text"
+              placeholder="Landmark"
+              value={landmarkValue}
+              onChange={(e) => setLandmarkValue(e.target.value)}
+              className="bg-transparent rounded-md p-1"
+            />
+          )}
+          {street && (
+            <input
+              type="text"
+              placeholder="Street"
+              value={streetValue}
+              onChange={(e) => setStreetValue(e.target.value)}
+              className="bg-transparent rounded-md p-1"
+            />
+          )}
+        </div>
       </div>
       <div className="flex md:w-full md:justify-center align-middle">
-        <button
-          onClick={getLocationChange}
-          className="bg-yellow-300 md:w-full h-8 md:h-10 border-2 py-2 px-2 border-white text-white rounded-md"
-        >
-          Get Current Location
-        </button>
+        <Button onClick={getLocationChange} title={"get current location"} />
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ const Order = () => {
               const date = new Date(e.timestamp);
               const created = date.toLocaleDateString();
               return (
-                <div key={index} className="cardorder">
+                <div key={index} className="cardorder bg-icon border-[0.015rem] ">
                   <button type="button" className="dismissorder">
                     ×
                   </button>

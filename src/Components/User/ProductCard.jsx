@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import download__1 from "../../assets/download__1.png";
-import download__2 from "../../assets/download__2.png";
-import download__3 from "../../assets/download__3.png";
-import download__4 from "../../assets/download__4.png";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CartQuantitytoggle from "./CartQuantitytoggle";
 
@@ -15,19 +10,12 @@ const ProductCard = ({ props }) => {
   const handleWishList = () => {
     setWished(!wished);
   };
-  const productImages = [
-    download__1,
-    download__2,
-    download__3,
-    download__4,
-    download__1,
-    download__2,
-    download__3,
-    download__4,
-  ];
-
+  const blob = new Blob([Int8Array.from(props.image.data.data)], {
+    type: props.image.contentType,
+  });
+  const imageSrc = window.URL.createObjectURL(blob);
   return (
-    <div className="w-1/2 sm:w-1/3 flex flex-col p-2">
+    <div className="w-1/2 md:w-1/4 sm:w-1/3 flex flex-col p-2">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -41,7 +29,7 @@ const ProductCard = ({ props }) => {
         theme="dark"
         transition:Bounce
       />
-      <div className="bg-slate-100 h-full rounded-lg flex flex-col p-2 justify-center align-middle relative">
+      <div className="border-[0.025rem] hover:border-[#646cff] border-[#818181] h-full rounded-lg flex flex-col p-2 justify-center align-middle relative">
         <div className="absolute top-4 right-4">
           {wished ? (
             <FaHeart
@@ -54,11 +42,7 @@ const ProductCard = ({ props }) => {
           )}
         </div>
         <Link to={`/product/${props._id}`}>
-          <img
-            className="h-36 mt-4 mx-auto"
-            src={productImages[props.src]}
-            alt=""
-          />
+          <img className="h-44 mt-4 mx-auto" src={imageSrc} alt="" />
         </Link>
       </div>
       <div
@@ -67,10 +51,11 @@ const ProductCard = ({ props }) => {
       >
         <div>
           <Link to={`/product/${props._id}`}>
-            <h2 className="text-slate-900 underline font-bold text-lg truncate">
-              {props.name}
-            </h2>
+            <h2 className="font-bold text-lg truncate">{props.name}</h2>
           </Link>
+        </div>
+        <div>
+          <p className="text-sm">{props.company}</p>
         </div>
         <div className="my-auto flex justify-between align-middle">
           <h3 className="my-auto">Rs.{props.price_INR}</h3>
