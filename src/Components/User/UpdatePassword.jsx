@@ -37,7 +37,7 @@ const UpdatePassword = () => {
         </div>
         <div className="px-4 mb-4">
           <input
-            className="rounded-md w-full"
+            className="rounded-md bg-transparent text-white w-full"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -46,7 +46,7 @@ const UpdatePassword = () => {
         </div>
         <div className="px-4">
           <input
-            className="rounded-md w-full"
+            className="rounded-md bg-transparent text-white w-full"
             type="password"
             value={password2}
             onChange={(e) => setPassword2(e.target.value)}
