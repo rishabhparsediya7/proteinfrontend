@@ -50,7 +50,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     name="full_name"
                     id="full_name"
-                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    className="h-10 bg-transparent border mt-1 rounded px-4 w-full bg-gray-50"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                   />
@@ -62,7 +62,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     name="email"
                     id="email"
-                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    className="h-10 border bg-transparent mt-1 rounded px-4 w-full bg-gray-50"
                     value={user.email}
                     onChange={(e) => setEmail(e.target.value)}
                     contentEditable={false}
@@ -75,7 +75,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     name="address"
                     id="address"
-                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    className="h-10 border bg-transparent mt-1 rounded px-4 w-full bg-gray-50"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder=""
@@ -88,7 +88,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     name="city"
                     id="city"
-                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    className="h-10 border bg-transparent mt-1 rounded px-4 w-full bg-gray-50"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder=""
@@ -129,7 +129,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     name="zipcode"
                     id="zipcode"
-                    className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    className="transition-all bg-transparent flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                     placeholder=""
                     value={zipcode}
                     onChange={(e) => setZipcode(e.target.value)}
