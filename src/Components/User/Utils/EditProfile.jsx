@@ -33,16 +33,16 @@ const EditProfile = ({ user }) => {
     }
   };
   return (
-    <div className="container max-w-screen-lg mx-auto">
+    <div className="container max-w-full mx-auto">
       <div className="bg-[#413e3e52] rounded shadow-lg p-4 px-4 md:p-8 mb-6">
         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-          <div className="text-gray-600">
+          <div className="text-gray-600 lg:col-span-1">
             <p className="font-medium text-xl text-white uppercase tracking-wider">
               Personal Details
             </p>
           </div>
-          <form onSubmit={handleSubmit}>
-            <div className="lg:col-span-2">
+          <div className="w-full lg:col-span-2">
+            <form className="w-100" onSubmit={handleSubmit}>
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                 <div className="md:col-span-5">
                   <label htmlFor="full_name">Full Name</label>
@@ -146,8 +146,8 @@ const EditProfile = ({ user }) => {
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
