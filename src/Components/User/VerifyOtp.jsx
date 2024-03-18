@@ -7,6 +7,7 @@ const VerifyOtp = ({ length }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState(new Array(length).fill(""));
+  const [error, setError] = useState("");
   const [finalOtp, setFinalOtp] = useState("");
   const inputRefs = useRef([]);
   const navigate = useNavigate();
@@ -20,18 +21,21 @@ const VerifyOtp = ({ length }) => {
 
   const handleChange = (index, e) => {
     const value = e.target.value;
-    if (isNaN(value)) return;
-
-    const newOtp = [...otp];
-    newOtp[index] = value.substring(value.length - 1);
-    setOtp(newOtp);
-    const combinedOtp = newOtp.join("");
-    if (combinedOtp.length === length) {
-      setDisabledSubmit(!disabledSubmit);
-      setFinalOtp(combinedOtp);
-    }
-    if (value && index < length - 1 && inputRefs.current[index + 1]) {
-      inputRefs.current[index + 1].focus();
+    if (!/^\d*$/.test(value)) {
+      console.log(value);
+      return;
+    } else {
+      const newOtp = [...otp];
+      newOtp[index] = value.substring(value.length - 1);
+      setOtp(newOtp);
+      const combinedOtp = newOtp.join("");
+      if (combinedOtp.length === length) {
+        setDisabledSubmit(!disabledSubmit);
+        setFinalOtp(combinedOtp);
+      }
+      if (value && index < length - 1 && inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
+      }
     }
   };
 
@@ -55,16 +59,25 @@ const VerifyOtp = ({ length }) => {
 
   const handleVerifyOTP = () => {
     setLoading(true);
+    if (isNaN(finalOtp)) {
+      console.log(finalOtp);
+      return;
+    }
     const verifyOtp = async () => {
-      const response = await axios.post(`${BASE_URL}/auth/verify-otp`, {
-        email: localStorage.getItem("email"),
-        otp: finalOtp,
-      });
-      if (response.status === 200) {
-        localStorage.setItem("verified", true);
-        setOtp(new Array(length).fill(""));
-        setLoading(false);
-        navigate("/update-password");
+      try {
+        const response = await axios.post(`${BASE_URL}/auth/verify-otp`, {
+          email: localStorage.getItem("email"),
+          otp: finalOtp,
+        });
+        if (response.status === 200) {
+          localStorage.setItem("verified", true);
+          setOtp(new Array(length).fill(""));
+          setLoading(false);
+          navigate("/update-password");
+        }
+      } catch (err) {
+        console.log(err);
+        setError(err.message);
       }
     };
     verifyOtp();
@@ -79,8 +92,8 @@ const VerifyOtp = ({ length }) => {
       </div>
       <div className="p-4 m-auto">
         <h2 className="text-2xl">
-          Enter the OTP you have received on your mail{" "}
-          <strong> {localStorage.getItem("email")}</strong>
+          Enter the OTP you have received on your mail
+          <strong className="italic"> {localStorage.getItem("email")}</strong>
         </h2>
       </div>
       <div className="px-4 flex gap-2 justify-center">
@@ -92,13 +105,14 @@ const VerifyOtp = ({ length }) => {
               onChange={(e) => handleChange(index, e)}
               onKeyDown={(e) => handleKeyDown(index, e)}
               ref={(inp) => (inputRefs.current[index] = inp)}
-              className="rounded-md w-12 px-4 text-xl"
+              className="rounded-md w-12 px-4 text-xl bg-transparent text-white"
               type="text"
               required
             />
           ))}
       </div>
       <div className="p-4">
+        {error && <p>{error}</p>}
         <button
           className="btn text-xl uppercase font-bold w-full py-2 border-slate-500 bg-yellow-200 rounded-md text-black"
           onClick={handleVerifyOTP}

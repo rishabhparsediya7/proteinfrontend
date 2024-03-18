@@ -26,7 +26,8 @@ export const filterSlice = createSlice({
   },
 });
 
-export const { addCategory, addCompany, addPrice, addSort } = filterSlice.actions;
+export const { addCategory, addCompany, addPrice, addSort } =
+  filterSlice.actions;
 
 export const selectCategory = (state) => state.filter.category;
 export const selectCompany = (state) => state.filter.company;

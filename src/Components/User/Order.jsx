@@ -32,16 +32,16 @@ const Order = () => {
       <Navbar />
       {errors && <p>{errors}</p>}
       <div className="w-full flex flex-col">
-        <div className="w-full p-20 absolute flex flex-wrap gap-2">
+        <div className="w-full p-4 sm:p-20 absolute flex flex-wrap gap-2">
           {orders &&
             orders.map((e, index) => {
               const date = new Date(e.timestamp);
               const created = date.toLocaleDateString();
               return (
-                <div key={index} className="cardorder bg-icon border-[0.015rem] ">
-                  <button type="button" className="dismissorder">
-                    ×
-                  </button>
+                <div
+                  key={index}
+                  className="cardorder bg-icon border-[0.015rem] "
+                >
                   <div className="headerorder">
                     <div className="imageorder">
                       <svg

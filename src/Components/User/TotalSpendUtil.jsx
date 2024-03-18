@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const TotalSpendUtil = () => {
+const TotalSpendUtil = ({ user }) => {
   return (
-    <div>TotalSpendUtil</div>
-  )
-}
+    <div>
+      {user.totalSpends ? (
+        <h1>Total Spending on the Orders: {user.totalSpends}</h1>
+      ) : (
+        <h1>No Spending yet</h1>
+      )}
+    </div>
+  );
+};
 
-export default TotalSpendUtil
+export default TotalSpendUtil;

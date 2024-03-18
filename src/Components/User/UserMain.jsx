@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import image1 from "../../assets/1.png";
 import image2 from "../../assets/2.png";
 import FilterProduct from "./FilterProduct";
@@ -6,6 +6,7 @@ import ProductComponent from "./ProductComponent";
 import bgimage from "../../assets/bgsearchbar.jpeg";
 import inputicon from "../../assets/iconvector.png";
 import Footer from "./Footer";
+
 const UserMain = () => {
   const images = [image1, image2, image1, image2, image1, image2];
   const [inputValue, setInputValue] = useState("");

@@ -38,6 +38,7 @@ const CartDetails = () => {
     });
   };
   const displayRazorpay = async () => {
+    console.log("clicked");
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -155,7 +156,7 @@ const CartDetails = () => {
                   onChange={(e) => setOrdered_by(e.target.value)}
                 />
                 <Button
-                  onClick={() => displayRazorpay()}
+                  handler={displayRazorpay}
                   disabled={localStorage.getItem("access_token") ? false : true}
                   title={"checkout"}
                 />

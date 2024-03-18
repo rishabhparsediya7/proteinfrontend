@@ -34,9 +34,12 @@ export const cartSlice = createSlice({
         } else state.cartList[exists].quantity = q - 1;
       }
     },
+    emptyCart: (state, action) => {
+      state.cartList = [];
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, emptyCart } = cartSlice.actions;
 export const selectCartCount = (state) => state.cart.cartList.length;
 export default cartSlice.reducer;

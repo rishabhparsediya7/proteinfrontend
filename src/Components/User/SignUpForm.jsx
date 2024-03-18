@@ -32,7 +32,7 @@ const SignUpForm = ({ handleToggle }) => {
         <img src={signupbanner} className="h-40 w-40 rounded-full" alt="" />
       </div>
       <div className="p-4 m-auto">
-        <h2 className="text-2xl">New User ?. Enter your mail.</h2>
+        <h2 className="text-2xl text-left uppercase">Enter your mail</h2>
       </div>
       <div className="px-4">
         <input

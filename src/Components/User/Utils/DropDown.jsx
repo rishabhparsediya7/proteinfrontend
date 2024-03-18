@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import { addCategory, addCompany, addSort } from "../../../redux/filterSlice";
 import { FilterContext } from "../../../context/UserContext";
 const DropDown = ({ Classes, list, cate }) => {
@@ -21,16 +21,16 @@ const DropDown = ({ Classes, list, cate }) => {
       dispatch(addCompany(ev));
       setCompany(ev);
     }
-    if (cate === "Sort by") {
-      if (ev === "Price High to Low") dispatch(addSort("DESC"));
-      else if (ev === "Price Low to High") dispatch(addSort("ASC"));
+    if (cate === "Sort_By") {
+      if (ev === "Price_High_to_Low") dispatch(addSort("DESC"));
+      else if (ev === "Price_Low_to_High") dispatch(addSort("ASC"));
     }
     if (listHide) setListHide(false);
   };
   return (
-    <div className={`max-h-2 ${Classes ? `ml-2` : ``}`}>
+    <div className={`max-h-2 flex flex-col}`}>
       <button
-        className="inline-flex items-center px-3 py-2 mb-3 me-3 text-sm font-medium text-center text-white bg-icon border-[0.010rem] border-[#ffffff] rounded-md md:mb-0 focus:outline-none"
+        className="inline-flex items-center px-3 py-5 mb-3 me-3 text-sm font-medium text-center text-white bg-icon border-[0.010rem] border-[#ffffff] rounded-md md:mb-0 focus:outline-none"
         type="button"
         onClick={handleToggle}
       >
@@ -40,7 +40,7 @@ const DropDown = ({ Classes, list, cate }) => {
       <div
         className={`z-10 ${
           listHide ? `` : `hidden`
-        } bg-white divide-y absolute divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+        } bg-white mt-10 divide-y absolute divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
       >
         <ul className="py-2 text-sm z-50 text-gray-700 dark:text-gray-200">
           {list &&

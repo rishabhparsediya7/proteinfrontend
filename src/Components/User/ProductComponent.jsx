@@ -64,10 +64,15 @@ const ProductComponent = () => {
         </div>
       )}
       <div className={`w-full flex flex-wrap ${loading ? "opacity-30" : ""}`}>
-        {products &&
+        {products.length > 0 ? (
           products.map((e, index) => {
             return <ProductCard key={index} props={{ ...e }} />;
-          })}
+          })
+        ) : (
+          <div className="w-full p-10 text-center text-xl uppercase">
+            {loading ? "Products Loading..." : "No products matching filter"}
+          </div>
+        )}
       </div>
     </div>
   );

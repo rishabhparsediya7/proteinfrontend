@@ -18,7 +18,6 @@ const SigninForm = () => {
         password: password,
       });
       if (response.status == 200) {
-        console.log(response);
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("loggedIn", true);
         localStorage.setItem("userid", response.data.userId);
@@ -73,6 +72,7 @@ const SigninForm = () => {
           <input
             className="rounded-md w-full bg-transparent border border-b-2"
             type="password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

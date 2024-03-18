@@ -25,7 +25,6 @@ const Navbar = () => {
   ];
 
   const handleModal = () => {
-    console.log("hi");
     setModalOpen(!ismodalOpen);
   };
   const handleLogout = () => {
@@ -40,6 +39,7 @@ const Navbar = () => {
   return (
     <div className="w-full">
       <div className="w-full text-base flex justify-between px-2 py-4 shadow-md ">
+        {/* for full width*/}
         <div className="w-full hidden md:block z-10">
           <div
             className="md:hidden w-fit rounded-md p-2 text-white"
@@ -58,15 +58,27 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
-        <div
-          className="md:hidden w-fit rounded-md p-2 text-white"
-          onClick={handleModal}
-        >
-          <i className="text-4xl bi bi-text-indent-left"></i>
+        <div className="md:hidden w-fit rounded-md p-2 text-white">
+          <i
+            className={` text-4xl bi ${ismodalOpen ? `bi bi-x-lg` : `bi-list`}`}
+            onClick={handleModal}
+          ></i>
+          {ismodalOpen && (
+            <ul className="flex gap-2 flex-col md:flex-row">
+              {navigations.map((e, index) => (
+                <li
+                  className="hover:bg-icon hover:rounded-md hover:border-[0.015rem] hover:border-[#a4a4e9] rounded-md p-3"
+                  key={index}
+                >
+                  <Link to={e.href}>{e.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex max-h-14 gap-2">
           {!localStorage.getItem("loggedIn") && (
-            <div className="auth h-full">
+            <div className="auth">
               <ul className="flex">
                 <li className="hover:bg-icon hover:border-[#646cff] md:w-24 hover:text-neutral-50 hover:rounded-md rounded-lg p-3">
                   <Link to="/signup" className="mx-auto">
@@ -83,12 +95,15 @@ const Navbar = () => {
           )}
           {localStorage.getItem("loggedIn") && (
             <div className="m-auto">
-              <button className="p-2" onClick={handleLogout}>
+              <button
+                className="p-4 uppercase tracking-wider rounded-md"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>
           )}
-          <div className="bg-icon h-full rounded-md p-2 relative">
+          <div className="bg-icon rounded-md p-2 relative">
             <div className="absolute flex justify-center align-middle -right-1 -top-1 rounded-full h-5 w-5 bg-white text-[#1a1a1a] text-sm my-auto">
               {cartCount}
             </div>

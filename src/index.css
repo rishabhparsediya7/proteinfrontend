@@ -63,6 +63,10 @@
     border: 1px solid #ccc; /* Add a border to the thumb */
     cursor: pointer; /* Set cursor to pointer */
   }
+  .horizontal-scroll-container {
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* Hides scrollbar on IE/Edge */
+  }
 }
 button {
   background-color: #1a1a1a;
@@ -72,6 +76,6 @@ button:hover {
   border-color: #646cff;
 }
 
-canvas{
+canvas {
   width: 100% !important;
 }
