@@ -10,6 +10,7 @@ import Button from "./Utils/Button";
 import "./cartDetail.css";
 const CartDetails = () => {
   const [ordered_by, setOrdered_by] = useState("");
+  const [disabledCheckout, setDisabledCheckout] = useState(true);
   const navigate = useNavigate();
   const cartListData = useSelector((state) => state.cart.cartList);
   const amount = cartListData.reduce(getTotal, 0);
@@ -104,6 +105,14 @@ const CartDetails = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
+  const handleCheckout = () => {
+    if (localStorage.getItem("access_token")) {
+      displayRazorpay();
+    } else {
+      setDisabledCheckout("You need to Signup/Signin first.");
+      return;
+    }
+  };
   return (
     <div className="w-full">
       <div className="w-full flex flex-col md:flex-row">
@@ -155,11 +164,10 @@ const CartDetails = () => {
                   placeholder="Ordered By"
                   onChange={(e) => setOrdered_by(e.target.value)}
                 />
-                <Button
-                  handler={displayRazorpay}
-                  disabled={localStorage.getItem("access_token") ? false : true}
-                  title={"checkout"}
-                />
+                {disabledCheckout && (
+                  <p className="text-red-500 text-center rounded-md p-1 bg-red-200">{disabledCheckout}</p>
+                )}
+                <Button handler={handleCheckout} title={"checkout"} />
               </div>
             </div>
           </div>
